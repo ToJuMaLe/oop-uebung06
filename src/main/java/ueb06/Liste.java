@@ -29,7 +29,12 @@ class Liste<T> {
 	 * Wie `add`, aber rekursiv zu implementieren.
 	 */
 	void addRek(T value) {
-		throw new UnsupportedOperationException();
+		if(first ==null) first = new Element( value);
+		else addRek(value, first);
+	}
+	void addRek(T value,Element e){
+		if(e.next == null) e.next = new Element(value);
+		else addRek(value,e.next);
 	}
 
 	/**
@@ -53,7 +58,14 @@ class Liste<T> {
 	 * Wie `contains`, nur rekursiv zu implementieren.
 	 */
 	boolean containsRek(T value) {
-		throw new UnsupportedOperationException();
+		if(first==null) return false;
+		return containsRek(value,first);
+	}
+
+	boolean containsRek(T value, Element e) {
+		if(e.value.equals(value)) return true;
+		if(e.next == null) return false;
+		return containsRek(value,e.next);
 	}
 
 	/**
@@ -79,6 +91,12 @@ class Liste<T> {
 	 * Zusatzaufgabe: Wie `toString`, nur rekursiv zu implementieren.
 	 */
 	String toStringRek() {
-		throw new UnsupportedOperationException();
+		if(first==null) return "[]";
+		return "[" + toStringRek(first) + "]";
+	}
+
+	String toStringRek(Element e) {
+		if(e.next==null) return e.value.toString();
+		return e.value.toString() + ", " + toStringRek(e.next);
 	}
 }
